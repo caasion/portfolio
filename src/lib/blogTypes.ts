@@ -2,7 +2,6 @@ export interface PostData {
     title: string;
     description: string;
     date: string;
-    publish: boolean;
 }
 
 export interface Post {
@@ -15,4 +14,5 @@ export interface PostIndexData {
     id: string;
     title: string;
     date: string;
+    description: string;
 }
