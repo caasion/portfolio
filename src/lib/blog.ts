@@ -3,22 +3,11 @@ import path from "path";
 import fs from 'fs';
 import { remark } from "remark";
 import html from 'remark-html';
+import type { Post, PostData, PostIndexData } from "./blogTypes";
 
 const blogDirectory = path.join(process.cwd(), 'content/blog');
 
-interface PostData {
-    title: string;
-    description: string;
-    date: string;
-    publish: boolean;
-}
-
-interface Post {
-    id: string;
-    frontmatter: PostData;
-    contentHTML: string;
-}
-
+/** Get all frontmatter data and contents for one specific post. Used for singular blog page */
 export async function getPostData(id: string): Promise<Post> {
     // Read file from database
     const fullPath = path.join(blogDirectory, `${id}.md`);
