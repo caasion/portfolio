@@ -1,6 +1,8 @@
 import matter from "gray-matter";
 import path from "path";
 import fs from 'fs';
+import { remark } from "remark";
+import html from 'remark-html';
 
 const contentDirectory = path.join(process.cwd(), 'content');
 
@@ -12,20 +14,25 @@ interface PostData {
 }
 
 interface Post {
-    slug: string;
+    id: string;
     frontmatter: PostData;
-    content: string;
+    contentHTML: string;
 }
 
-export function getPostBySlug(slug: string): Post {
+export async function getPostData(id: string): Promise<Post> {
     // Read file from database
-    const fullPath = path.join(contentDirectory, `${slug}.md`);
+    const fullPath = path.join(contentDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, `utf8`);
 
     // Parse metadata & destructure markdown file
     const { data, content } = matter(fileContents);
 
-    // Process file contents
+    // Use remark to convert markdown into HTL string
+    const processedContent = await remark()
+        .use(html)
+        .process(content)
 
-    return { slug, frontmatter: data as PostData, content };
+    const contentHTML = processedContent.toString();
+
+    return { id, frontmatter: data as PostData, contentHTML };
 }
