@@ -44,7 +44,7 @@ export function getSortedBlogData(): PostIndexData[] {
 
         return {
             id,
-            ...(data as { date: string; title: string })
+            ...(data as { title: string; date: string; description: string })
         };
     });
 
