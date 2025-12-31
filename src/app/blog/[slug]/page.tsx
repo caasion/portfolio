@@ -1,4 +1,10 @@
-import { getPostData } from "@/lib/blog";
+import { getPostData, getSortedBlogData } from "@/lib/blog";
+
+// Generate static params so all blog posts are pre-rendered at built time
+export async function generateStaticParams() {
+    const posts = getSortedBlogData();
+    return posts.map((post) => ({ slug: post.id }));
+}
 
 export default async function BlogPost(props: any) {
     const params = await props.params;
