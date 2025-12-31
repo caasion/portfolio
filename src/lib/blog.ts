@@ -4,7 +4,7 @@ import fs from 'fs';
 import { remark } from "remark";
 import html from 'remark-html';
 
-const contentDirectory = path.join(process.cwd(), 'content');
+const blogDirectory = path.join(process.cwd(), 'content/blog');
 
 interface PostData {
     title: string;
@@ -21,7 +21,7 @@ interface Post {
 
 export async function getPostData(id: string): Promise<Post> {
     // Read file from database
-    const fullPath = path.join(contentDirectory, `${id}.md`);
+    const fullPath = path.join(blogDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, `utf8`);
 
     // Parse metadata & destructure markdown file
