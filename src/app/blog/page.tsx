@@ -1,6 +1,7 @@
 import { getSortedBlogData } from '@/lib/blog';
 import Link from 'next/link';
 import Image from 'next/image';
+import TagsList from './_components/TagsList';
 
 export default function BlogIndex() {
   const allPosts = getSortedBlogData();
@@ -20,12 +21,7 @@ export default function BlogIndex() {
               <div className=''>
                 <p className="text-gray-500 text-sm mb-2">{date}</p>
                 <h2 className="text-xl font-semibold mb-2">{title}</h2>
-                <div className="flex gap-2">
-                  {tags.map(tag => (
-                    <p key={tag} className="text-purple-200 text-sm mb-2">{tag}</p>
-                  ))}
-                </div>
-                
+                <TagsList tags={tags} />
                 <p className="text-gray-200 text-md">{description}</p>
               </div>
               

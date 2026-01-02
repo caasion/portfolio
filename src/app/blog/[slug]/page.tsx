@@ -1,4 +1,5 @@
 import { getPostData, getSortedBlogData } from "@/lib/blog";
+import TagsList from "../_components/TagsList";
 
 // Generate static params so all blog posts are pre-rendered at built time
 export async function generateStaticParams() {
@@ -16,10 +17,11 @@ export default async function BlogPost(props: any) {
     
         {/* Header Section */}
         <header className="mb-10 text-center">
+          <time className="text-gray-500">{post.date}</time>
+            <TagsList tags={post.tags} className="justify-center" />
           <h1 className="text-4xl font-extrabold tracking-tight mb-2">
             {post.title}
           </h1>
-          <time className="text-gray-500">{post.date}</time>
         </header>
 
         {/* The Content Body */}
