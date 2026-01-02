@@ -35,11 +35,17 @@ function copyImageToPublic(slug: string, imageFilename: string) {
 /** Get all frontmatter data and contents for one specific post. Used for singular blog page */
 export async function getPostData(id: string): Promise<PostData> {
     // Read file from database
-    const fullPath = path.join(blogDirectory, `${id}.md`);
+    const fullPath = path.join(blogDirectory, `${id}`, 'index.md');
     const fileContents = fs.readFileSync(fullPath, `utf8`);
 
     // Use gray-matter to parse metadata & destructure markdown file
     const { data, content } = matter(fileContents);
+
+    // Asset pipeline: Copy over image if needed & return long path
+    let coverImage = null;
+    if (data.coverImage) {
+        coverImage = copyImageToPublic(id, data.coverImage);
+    }
 
     // Use remark to convert markdown into HTL string
     const processedContent = await remark()
@@ -48,7 +54,7 @@ export async function getPostData(id: string): Promise<PostData> {
 
     const contentHTML = processedContent.toString();
 
-    return { id, ...(data as { title: string; date: string; description: string; coverRef: string; }), contentHTML };
+    return { id, ...(data as { title: string; date: string; description: string; coverImage: string; }), contentHTML };
 }
 
 /** Gets a list of specific frontmatter data for all posts sorted by date. Used for blog index. */
