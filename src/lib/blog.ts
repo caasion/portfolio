@@ -7,6 +7,31 @@ import type { PostData, PostIndexData } from "./blogTypes";
 
 const blogDirectory = path.join(process.cwd(), 'content/blog');
 
+/** Given a blog post slug and an image filename, copies the image from the source to the public folder if it exists in source (and isn't duplicate in destination). Returns a string to the path of the image. */
+function copyImageToPublic(slug: string, imageFilename: string) {
+    // Get the current image path
+    const sourcePath = path.join(blogDirectory, slug, imageFilename);
+
+    // Define the destination path (i.e. public/images/blog/slug/filename.png)
+    const destDir = path.join('public', 'images', 'blog', slug);
+    const destPath = path.join(destDir, imageFilename);
+
+    // Create destination folder if it doesn't exist
+    if (!fs.existsSync(destDir)) {
+        fs.mkdirSync(destDir, { recursive: true });
+    }
+
+    // Copy the file only if it exists in source and doesn't exist in destination
+    if (fs.existsSync(sourcePath)) {
+        if (!fs.existsSync(destPath)) {
+            fs.copyFileSync(sourcePath, destPath);
+        }
+        return `/images/blog/${slug}/${imageFilename}` 
+    }
+    
+    return null;
+}
+
 /** Get all frontmatter data and contents for one specific post. Used for singular blog page */
 export async function getPostData(id: string): Promise<PostData> {
     // Read file from database
@@ -52,4 +77,11 @@ export function getSortedBlogData(): PostIndexData[] {
             return -1;
         }
     })
+}
+
+export function getImageFromFilename(filename: string) {
+    // Get full directory
+    const fullPath = blogDirectory;
+
+    
 }
