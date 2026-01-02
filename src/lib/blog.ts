@@ -35,7 +35,7 @@ function copyImageToPublic(slug: string, imageFilename: string) {
 /** Get all frontmatter data and contents for one specific post. Used for singular blog page */
 export async function getPostData(id: string): Promise<PostData> {
     // Read file from database
-    const fullPath = path.join(blogDirectory, `${id}`, 'index.md');
+    const fullPath = path.join(blogDirectory, id, 'index.md');
     const fileContents = fs.readFileSync(fullPath, `utf8`);
 
     // Use gray-matter to parse metadata & destructure markdown file
@@ -59,22 +59,28 @@ export async function getPostData(id: string): Promise<PostData> {
 
 /** Gets a list of specific frontmatter data for all posts sorted by date. Used for blog index. */
 export function getSortedBlogData(): PostIndexData[] {
-    // Get file names under /content/blog
-    const fileNames = fs.readdirSync(blogDirectory);
+    // Get all directories under /content/blog
+    const dirNames = fs.readdirSync(blogDirectory)
+        .filter(dir => fs.statSync(path.join(blogDirectory, dir)).isDirectory());
 
-    const allBlogData = fileNames.map((filename) => {
-        // Strip '.md' from filenames to get id
-        const id = filename.replace(/\.md$/, '');
+    // Map each directory to PostIndexData
+    const allBlogData = dirNames
+        .map(slug => {
+            // Read file from database
+            const fullPath = path.join(blogDirectory, slug, 'index.md');
+            const fileContents = fs.readFileSync(fullPath, 'utf8');
 
-        // Read markdown files as strings
-        const fullPath = path.join(blogDirectory, filename);
-        const fileContents = fs.readFileSync(fullPath, `utf8`);
+            // Use gray-matter to get frontmatter data
+            const { data } = matter(fileContents);
 
-        // Use gray-matter to parse the post metadata
-        const { data } = matter(fileContents);
+            // Asset pipeline: Copy over image if needed & return long path
+            let coverImage = null;
+            if (data.coverImage) {
+                coverImage = copyImageToPublic(slug, data.coverImage);
+            }
 
-        return { id, ...(data as { title: string; date: string; description: string; coverRef: string; }) };
-    });
+            return { id: slug, ...(data as { title: string; date: string; description: string; coverImage: string; })}
+        })
 
     return allBlogData.sort((a, b) => {
         if (a.date < b.date) {
@@ -83,11 +89,4 @@ export function getSortedBlogData(): PostIndexData[] {
             return -1;
         }
     })
-}
-
-export function getImageFromFilename(filename: string) {
-    // Get full directory
-    const fullPath = blogDirectory;
-
-    
 }
