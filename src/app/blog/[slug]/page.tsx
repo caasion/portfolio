@@ -10,7 +10,6 @@ export default async function BlogPost(props: any) {
   const params = await props.params;
 
   const post = await getPostData(params.slug);
-  const postData = post.frontmatter;
   
   return (
       <article className="max-w-3xl mx-auto py-10 px-4">
@@ -18,9 +17,9 @@ export default async function BlogPost(props: any) {
         {/* Header Section */}
         <header className="mb-10 text-center">
           <h1 className="text-4xl font-extrabold tracking-tight mb-2">
-            {postData.title}
+            {post.title}
           </h1>
-          <time className="text-gray-500">{postData.date}</time>
+          <time className="text-gray-500">{post.date}</time>
         </header>
 
         {/* The Content Body */}
