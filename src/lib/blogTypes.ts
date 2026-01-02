@@ -1,18 +1,14 @@
-export interface PostData {
+export interface PostIndexData {
+    id: string;
+
+    // Frontmatter fields
     title: string;
     description: string;
     date: string;
+    coverRef: string; // Blank if no cover. Otherwise a string of the filename of the cover image (must be in the same directory).
 }
 
-export interface Post {
-    id: string;
-    frontmatter: PostData;
+export interface PostData extends PostIndexData {
     contentHTML: string;
 }
 
-export interface PostIndexData {
-    id: string;
-    title: string;
-    date: string;
-    description: string;
-}

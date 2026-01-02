@@ -3,12 +3,12 @@ import path from "path";
 import fs from 'fs';
 import { remark } from "remark";
 import html from 'remark-html';
-import type { Post, PostData, PostIndexData } from "./blogTypes";
+import type { PostData, PostIndexData } from "./blogTypes";
 
 const blogDirectory = path.join(process.cwd(), 'content/blog');
 
 /** Get all frontmatter data and contents for one specific post. Used for singular blog page */
-export async function getPostData(id: string): Promise<Post> {
+export async function getPostData(id: string): Promise<PostData> {
     // Read file from database
     const fullPath = path.join(blogDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, `utf8`);
@@ -23,7 +23,7 @@ export async function getPostData(id: string): Promise<Post> {
 
     const contentHTML = processedContent.toString();
 
-    return { id, frontmatter: data as PostData, contentHTML };
+    return { id, ...(data as { title: string; date: string; description: string; coverRef: string; }), contentHTML };
 }
 
 /** Gets a list of specific frontmatter data for all posts sorted by date. Used for blog index. */
@@ -42,10 +42,7 @@ export function getSortedBlogData(): PostIndexData[] {
         // Use gray-matter to parse the post metadata
         const { data } = matter(fileContents);
 
-        return {
-            id,
-            ...(data as { title: string; date: string; description: string })
-        };
+        return { id, ...(data as { title: string; date: string; description: string; coverRef: string; }) };
     });
 
     return allBlogData.sort((a, b) => {
