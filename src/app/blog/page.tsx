@@ -5,8 +5,6 @@ import Image from 'next/image';
 export default function BlogIndex() {
   const allPosts = getSortedBlogData();
 
-  console.log(allPosts);
-
   return (
     <main className="max-w-3xl mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-8">My Blog</h1>

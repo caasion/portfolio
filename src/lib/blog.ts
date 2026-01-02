@@ -54,7 +54,7 @@ export async function getPostData(id: string): Promise<PostData> {
 
     const contentHTML = processedContent.toString();
 
-    return { id, ...(data as { title: string; date: string; description: string; coverImage: string; }), contentHTML };
+    return { id, ...(data as { title: string; date: string; description: string; }), coverImage, contentHTML };
 }
 
 /** Gets a list of specific frontmatter data for all posts sorted by date. Used for blog index. */
@@ -79,7 +79,7 @@ export function getSortedBlogData(): PostIndexData[] {
                 coverImage = copyImageToPublic(slug, data.coverImage);
             }
 
-            return { id: slug, ...(data as { title: string; date: string; description: string; coverImage: string; })}
+            return { id: slug, ...(data as { title: string; date: string; description: string; }), coverImage}
         })
 
     return allBlogData.sort((a, b) => {
