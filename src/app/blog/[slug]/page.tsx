@@ -1,5 +1,7 @@
 import { getPostData, getSortedBlogData } from "@/lib/blog";
 import TagsList from "../_components/TagsList";
+import AuthorsList from "../_components/AuthorList";
+
 
 // Generate static params so all blog posts are pre-rendered at built time
 export async function generateStaticParams() {
@@ -22,6 +24,8 @@ export default async function BlogPost(props: any) {
           <h1 className="text-4xl font-extrabold tracking-tight mb-2">
             {post.title}
           </h1>
+
+          <AuthorsList authors={post.authors} />
         </header>
 
         {/* The Content Body */}
