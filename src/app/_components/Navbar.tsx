@@ -1,6 +1,8 @@
 'use client';
 
 import Link from "next/link";
+import { BiSearchAlt } from "react-icons/bi";
+import { GiRabbit } from "react-icons/gi";
 
 const WEBSITE_SECTIONS = [
   {
@@ -29,8 +31,8 @@ export default function NavBar() {
 
   return (
     <div className="flex justify-between text-4xl">
-      <div>
-        {/* Logo */}
+      <div className="flex gap-2">
+        <GiRabbit />
         <Link href="/">Isaac Ng's BunOS</Link>
       </div>
 
@@ -38,6 +40,8 @@ export default function NavBar() {
         {WEBSITE_SECTIONS.map(section => (
           <Link key={section.href} href={section.href}>{section.label}</Link>
         ))}
+        <BiSearchAlt />
+        {/* Theme provider */}
       </div>
     </div>
   )
