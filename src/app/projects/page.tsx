@@ -23,7 +23,7 @@ const PROJECTS: ProjectCardProps[] = [
 export default function ProjectsPage() {
   return (
     <>
-      <h1 className="text-3xl font-bold mb-8">Projects</h1>
+      <h1>Projects</h1>
 
       {PROJECTS.map((project, index) => (
         <ProjectCard

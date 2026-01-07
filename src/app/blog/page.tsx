@@ -7,7 +7,8 @@ export default function BlogIndexPage() {
 
   return (
     <>
-      <h1 className="text-3xl font-bold mb-8">My Blog</h1>
+      <h1>Blog</h1>
+      <p className="font-display text-lg mb-8">Where I share my thoughts.</p>
 
       <BlogList initialPosts={initialPosts} />
     </>
