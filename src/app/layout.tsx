@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import NavBar from "./_components/Navbar";
 
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body
-        className={`${inter.variable} antialiased max-w-6xl mx-auto py-10 px-4`}
+        className={`${inter.className} antialiased max-w-6xl mx-auto py-10 px-4`}
       >
         <NavBar />
         {children}
