@@ -9,7 +9,7 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.id }));
 }
 
-export default async function BlogPost(props: any) {
+export default async function BlogPostPage(props: any) {
   const params = await props.params;
 
   const post = await getPostData(params.slug);
