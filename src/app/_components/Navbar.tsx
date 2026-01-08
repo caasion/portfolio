@@ -31,11 +31,13 @@ const WEBSITE_SECTIONS = [
 export default function NavBar() {
 
   return (
-    <div className="flex justify-between font-display mb-8 md:mb-16">
-      <Link href="/" className="flex gap-2 text-3xl" >
-        Isaac Ng's 
-        <GiRabbit />
-        BunOS
+    <div className="flex justify-between font-display mb-8 md:mb-1">
+      <Link href="/" className="flex items-center gap-2 text-3xl" >
+        <div className="text-base">Isaac Ng's</div>
+        <div className="text-accent flex gap-2">
+          <GiRabbit />
+          BunOS
+        </div>
       </Link>
 
       <div className="flex gap-4 text-lg items-center">
