@@ -1,5 +1,6 @@
 'use client';
 
+import ThemeToggle from "@/components/ThemeSelector";
 import Link from "next/link";
 import { BiSearchAlt } from "react-icons/bi";
 import { GiRabbit } from "react-icons/gi";
@@ -42,7 +43,7 @@ export default function NavBar() {
           <Link key={section.href} href={section.href}>{section.label}</Link>
         ))}
         <BiSearchAlt />
-        {/* Theme provider */}
+        <ThemeToggle />
       </div>
     </div>
   )
