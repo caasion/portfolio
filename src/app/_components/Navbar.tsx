@@ -5,10 +5,10 @@ import { BiSearchAlt } from "react-icons/bi";
 import { GiRabbit } from "react-icons/gi";
 
 const WEBSITE_SECTIONS = [
-  // {
-  //   label: "About",
-  //   href: "/about",
-  // },
+  {
+    label: "About",
+    href: "/about",
+  },
   {
     label: "Projects",
     href: "/projects",
@@ -30,7 +30,7 @@ const WEBSITE_SECTIONS = [
 export default function NavBar() {
 
   return (
-    <div className="flex justify-between font-display mb-8">
+    <div className="flex justify-between font-display mb-8 md:mb-16">
       <Link href="/" className="flex gap-2 text-3xl" >
         Isaac Ng's 
         <GiRabbit />
