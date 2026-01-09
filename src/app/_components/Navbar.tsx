@@ -31,12 +31,12 @@ const WEBSITE_SECTIONS = [
 export default function NavBar() {
 
   return (
-    <div className="flex justify-between font-display mb-8 md:mb-1">
-      <Link href="/" className="flex items-center gap-2 text-3xl" >
-        <div className="text-base">Isaac Ng's</div>
-        <div className="text-accent flex gap-2">
-          <GiRabbit />
-          BunOS
+    <div className="flex justify-between font-display mb-8 md:mb-12">
+      <Link href="/" className="flex gap-2 items-center" >
+        <GiRabbit className="text-accent text-6xl" />
+        <div className="flex flex-col">
+          <div className="text-base">Isaac Ng's</div>
+          <div className="text-accent text-4xl">BunOS</div>
         </div>
       </Link>
 
@@ -50,3 +50,16 @@ export default function NavBar() {
     </div>
   )
 }
+
+{/* 
+  Logo design with big logo and my name
+
+  <Link href="/" className="flex gap-2 items-center" >
+  <GiRabbit className="text-accent text-6xl" />
+  <div className="flex flex-col">
+    <div className="text-base">Isaac Ng's</div>
+    <div className="text-accent text-4xl">BunOS</div>
+  </div>
+</Link>
+
+*/}
