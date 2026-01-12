@@ -6,19 +6,51 @@ interface Project extends ProjectCardProps {
 
 export const PROJECTS: Project[] = [
   {
-    title: "Project Alpha",
-    subtitle: "A Modern Web Application",
-    description: "Built with Next.js and TypeScript, this project showcases advanced state management and real-time data synchronization. Features include user authentication, responsive design, and optimized performance.",
-    mediaSrc: "/images/projects/project-alpha.png",
+    title: "Holos",
+    subtitle: "Plan and track across your commitments and week",
+    description: "A weekly planning tool built with Svelte, TypeScript, and Esbuild, integrated into Obsidian. Features dynamic templates powered by Svelte 5 reactivity, Markdown-enabled cells via Milkdown, and custom data structures for managing tasks and daily actions. Designed for planning and tracking your progress.",
+    tags: [
+        {
+            label: "Typescript",
+            color: "blue"
+        },
+        {
+            label: "Svelte",
+            color: "red"
+        },
+        {
+            label: "Esbuild",
+            color: "yellow"
+        },
+        {
+            label: "Obsidian API",
+            color: "accent"
+        },
+    ],
+    mediaSrc: "/images/projects/holos.png",
     mediaType: "image" as const,
     mediaPosition: "right" as const,
     featured: true,
   },
   {
-    title: "Project Beta",
-    subtitle: "Mobile-First Experience",
-    description: "An innovative mobile application that revolutionizes user interaction. Implements gesture controls, smooth animations, and offline-first architecture for seamless user experience.",
-    mediaSrc: "/images/projects/project-beta.mp4",
+    title: "AI Todo List",
+    subtitle: "Plan and prioritize smarter",
+    description: "An AI-assisted to-do list built with React, TypeScript, and Vite. Uses Firebase to embed a ChatGPT-like assistant that generates tasks and suggests plans based on energy levels, with core task management features and experiments in prompt engineering.",
+    tags: [
+        {
+            label: "Typescript",
+            color: "blue"
+        },
+        {
+            label: "React",
+            color: "red"
+        },
+        {
+            label: "Vite",
+            color: "accent"
+        },
+    ],
+    mediaSrc: "/images/projects/ai-todo-list.mp4",
     mediaType: "video" as const,
     mediaPosition: "left" as const,
     featured: true,

@@ -15,6 +15,14 @@ export interface ProjectTag {
   color: string,
 }
 
+const colorClasses = {
+  accent: 'border-accent bg-accent/15',
+  blue: 'border-sky-500 bg-sky-500/15',
+  green: 'border-green-400 bg-green-400/15',
+  red: 'border-red-400 bg-red-400/15',
+  yellow: 'border-amber-300 bg-amber-300/15'
+};
+
 export default function ProjectCard({ 
   title, 
   subtitle, 
